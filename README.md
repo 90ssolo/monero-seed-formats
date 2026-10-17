@@ -112,7 +112,7 @@ Multi-coin software wallets (like Exodus, which ended Monero support in August 2
 
 | Wallet | 25-Word Legacy | 16-Word Polyseed | 13-Word MyMonero | 12-Word Exodus (BIP-39) | Raw Spend + View Keys |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **[MonkStash](https://monkstash.com)** | Yes | — | **Yes (Direct)** | **Yes (Direct)** | — |
+| **[MonkStash](https://monkstash.com)** | Yes | - | **Yes (Direct)** | **Yes (Direct)** | - |
 | **Monero GUI / CLI** | Yes | No | No | No | Yes (`--generate-from-keys`) |
 | **Feather Wallet** | Yes | Yes (Default) | Via keys | No ( converts standard BIP-39 only) | Yes |
 | **Cake Wallet** | Yes | Yes | Yes | Yes (`Exodus style` option) | Yes |
