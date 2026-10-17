@@ -1,0 +1,12 @@
+{
+  "name": "monero-seed-formats",
+  "version": "1.0.0",
+  "description": "Technical specification, key derivation rules, wallet compatibility matrix, and zero-dependency test vectors for 25-word Monero, 16-word Polyseed, 13-word MyMonero, and 12/24-word BIP-39 seeds.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node scripts/validate.mjs",
+    "validate": "node scripts/validate.mjs",
+    "inspect": "node scripts/inspect-format.mjs"
+  }
+}

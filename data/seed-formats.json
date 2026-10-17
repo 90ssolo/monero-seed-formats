@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0.0",
+  "last_verified": "2026-10-17",
+  "formats": [
+    {
+      "id": "legacy-25-electrum",
+      "name": "25-Word Monero Legacy (Electrum v2)",
+      "word_count": 25,
+      "data_words": 24,
+      "checksum_words": 1,
+      "wordlist": "monero-1626",
+      "unique_prefix_length": 3,
+      "entropy_bits": 256,
+      "embeds_restore_height": false,
+      "checksum_algorithm": "CRC-32 of concatenated 3-character prefixes of first 24 words modulo 24",
+      "spend_key_derivation": "b = decode_base1626_le32(words[0..23]) (already reduced mod l at generation)",
+      "view_key_derivation": "a = sc_reduce32(keccak256(b))",
+      "supported_wallets": [
+        "Monero GUI / CLI",
+        "MonkStash",
+        "Feather Wallet",
+        "Cake Wallet",
+        "Monerujo",
+        "Anonero"
+      ]
+    },
+    {
+      "id": "polyseed-16",
+      "name": "16-Word Polyseed",
+      "word_count": 16,
+      "data_words": 15,
+      "checksum_words": 1,
+      "wordlist": "bip39-2048",
+      "unique_prefix_length": 4,
+      "entropy_bits": 150,
+      "embeds_restore_height": true,
+      "checksum_algorithm": "Galois field GF(2048) polynomial Reed-Solomon code (11 bits)",
+      "spend_key_derivation": "b = sc_reduce32(PBKDF2_HMAC_SHA256(secret_150bit, domain_coin_0x80000080, 10000))",
+      "view_key_derivation": "a = sc_reduce32(keccak256(b))",
+      "supported_wallets": [
+        "Feather Wallet",
+        "Cake Wallet",
+        "Monerujo",
+        "Anonero"
+      ]
+    },
+    {
+      "id": "mymonero-13",
+      "name": "13-Word MyMonero Legacy",
+      "word_count": 13,
+      "data_words": 12,
+      "checksum_words": 1,
+      "wordlist": "monero-1626",
+      "unique_prefix_length": 3,
+      "entropy_bits": 128,
+      "embeds_restore_height": false,
+      "checksum_algorithm": "CRC-32 of concatenated 3-character prefixes of first 12 words modulo 12",
+      "spend_key_derivation": "h1 = keccak256(seed_16_bytes); b = sc_reduce32(h1)",
+      "view_key_derivation": "a = sc_reduce32(keccak256(h1))  [Hashes unreduced h1, NOT b]",
+      "supported_wallets": [
+        "MonkStash (Direct 13-word restore)",
+        "Cake Wallet (Legacy MyMonero import)",
+        "Feather Wallet (via raw spend/view keys)"
+      ]
+    },
+    {
+      "id": "bip39-12-exodus",
+      "name": "12-Word Exodus Style (BIP-39)",
+      "word_count": 12,
+      "data_words": 12,
+      "checksum_words": 0,
+      "wordlist": "bip39-2048",
+      "unique_prefix_length": 4,
+      "entropy_bits": 128,
+      "embeds_restore_height": false,
+      "checksum_algorithm": "4-bit SHA-256 prefix embedded in the 12th word",
+      "spend_key_derivation": "seed64 = PBKDF2_HMAC_SHA512(mnemonic, 'mnemonic'); k = BIP32(seed64, \"m/44'/128'/account'/0/0\"); b = sc_reduce32(k)",
+      "view_key_derivation": "a = sc_reduce32(keccak256(b))",
+      "supported_wallets": [
+        "MonkStash (Direct 12-word Exodus restore)",
+        "Cake Wallet (Exodus-style BIP-39 restore)",
+        "Any 25-word wallet after re-encoding b as 25 Monero words"
+      ]
+    },
+    {
+      "id": "bip39-24-ledger",
+      "name": "24-Word Hardware / Coinomi Style (BIP-39)",
+      "word_count": 24,
+      "data_words": 24,
+      "checksum_words": 0,
+      "wordlist": "bip39-2048",
+      "unique_prefix_length": 4,
+      "entropy_bits": 256,
+      "embeds_restore_height": false,
+      "checksum_algorithm": "8-bit SHA-256 prefix embedded in the 24th word",
+      "spend_key_derivation": "Hardware app derives slip10/bip32 node at m/44'/128'/0'/0/0 and hashes with Keccak-256 before sc_reduce32",
+      "view_key_derivation": "a = sc_reduce32(keccak256(b))",
+      "supported_wallets": [
+        "Ledger Monero App (with Monero GUI/CLI, Feather, Cake, Monerujo)",
+        "Trezor Safe / Model T"
+      ]
+    }
+  ],
+  "test_vectors": {
+    "mymonero_13": [
+      {
+        "source": "github.com/moneroexamples/mymonero-keys (Example 1)",
+        "phrase": "slid otherwise jeers lurk swung tawny zodiac tusks twang cajun swagger peaches tawny",
+        "seed_16_hex": "5878efd0a6d45b0374b49c000da07cd2",
+        "private_spend_key": "804f08b84507fb0610910d04ae517c07ae2f38f9330e42e86a50286db16ad60e",
+        "private_view_key": "dbb024c981cf7dc797593713f5f426c3b1cad50542c0814d4786e12e768be504",
+        "primary_address": "48VWHdLTEpE5dqa5VpAy5xgQWBHZARiGmEmojNLqD4ef1FAzkPxCe9JXUYwCShRR5XNMGnyusrnkmMWr2HMdfDRx2vsrG7c"
+      },
+      {
+        "source": "github.com/moneroexamples/mymonero-keys (Example 2)",
+        "phrase": "nearby hover hiker renting giddy purged chrome paddles point tsunami hoax pledge point",
+        "seed_16_hex": "fbdf0efd70ff3c5a321e0f0969041948",
+        "private_spend_key": "bef8b944fdc3eb086b9f0ee4e79aa30ce1510bfd0e45e86891264771de588404",
+        "private_view_key": "8952f17e4378c74fcd99ed6c70e799db60a601edf2685407087cc8c06d4db808",
+        "primary_address": "43oVy226ybWYYA93SExWoLR1tznhhaXRqi5pLtYWhcM3212LriHRkLecvj6zoehqkLRbN9P18LDBGPhP9fHHY7Ar1qi9QDM"
+      },
+      {
+        "source": "github.com/moneroexamples/mymonero-keys (Example 3)",
+        "phrase": "suddenly opus governing mystery divers obvious royal icon hefty nautical boxes among boxes",
+        "seed_16_hex": "852249bca4446e65501cc7f8338027ec",
+        "private_spend_key": "b5f423ed913983229cbdd9af61fa703f4f2d75c0a02bda4c5dbb14ce2913b90c",
+        "private_view_key": "601e6488942149980d9cd50298ef7cdb623cc58e8045f70de994faaea0a97a0e",
+        "primary_address": "43JrWR7mQYh8e4gLAhVeXpjkj5b4RePpv4utgkFt7bpRBxP1t5J4wQKUNNiapRubXSbCwMLZDJ9CJdRjV1m26Kz3KRB4iFJ"
+      }
+    ],
+    "exodus_bip39_to_legacy25": [
+      {
+        "source": "Cake Wallet cw_monero/test/bip39_seed_test.dart (Vector 1, Account 0)",
+        "bip39_phrase": "meadow tip best belt boss eyebrow control affair eternal piece very shiver",
+        "derivation_path": "m/44'/128'/0'/0/0",
+        "equivalent_25_word_seed": "tasked eight afraid laboratory tail feline rift reinvest vane cafe bailed foggy dormant paper jigsaw king hazard suture king dapper dummy jolted dating dwindling king"
+      },
+      {
+        "source": "Cake Wallet cw_monero/test/bip39_seed_test.dart (Vector 1, Account 1)",
+        "bip39_phrase": "meadow tip best belt boss eyebrow control affair eternal piece very shiver",
+        "derivation_path": "m/44'/128'/1'/0/0",
+        "equivalent_25_word_seed": "palace pairing axes mohawk rekindle excess awful juvenile shipped talent nibs efficient dapper biggest swung fight pact innocent emerge issued titans affair nearby noises emerge"
+      },
+      {
+        "source": "Cake Wallet cw_monero/test/bip39_seed_test.dart (Vector 2, Account 0)",
+        "bip39_phrase": "color ranch color remove subway public water embrace before begin liberty fault",
+        "derivation_path": "m/44'/128'/0'/0/0",
+        "equivalent_25_word_seed": "somewhere problems gauze gigantic intended foxes upcoming saved waffle pipeline lurk bogeys empty wipeout abbey italics novelty tucks rafts elite lunar obnoxious awful bugs elite"
+      }
+    ]
+  }
+}
